@@ -266,7 +266,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">329</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">433</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -395,7 +395,7 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>1.堆<br>堆中存储的全部是对象，每个对象都包含一个与之对应的class，不存储基本类型和对象的引用。在java JVM中只有一个堆区，且该堆区被所有线程共享。堆一般由程序员进行分配和释放。<br>2.栈<br>栈中存储的是基础数据类型和自定义对象的引用，内存中由多个栈区，每个线程都拥有属于他自己的一个栈区，并且栈区中的所有成员都是私有的，不能被其他线程的其他栈所访问。栈分为三个部分：基本类型变量区，执行环境上下文，操作指令区。栈是由系统编译器自行分配的。<br>3.静态存储区<br>存储所有的class和static变量，包含的都是程序中永远唯一的元素，他跟堆一样也是被所有线程所共享的。全局变量和静态变量的存储是放在一起的，初始化的全局变量和静态变量在一块区域中，未初始化的全局变量和静态变量在相邻的一块区域<br>最有效率算2*8应该是移位运算吧，2左移三位？2&lt;&lt;3，这样应该不会占内存</p>
+        <p>1.堆<br>堆中存储的全部是对象，每个对象都包含一个与之对应的class，不存储基本类型和对象的引用。在java JVM中只有一个堆区，且该堆区被所有线程共享。堆一般由程序员进行分配和释放。<br>2.栈<br>栈中存储的是基础数据类型和自定义对象的引用，内存中由多个栈区，每个线程都拥有属于他自己的一个栈区，并且栈区中的所有成员都是私有的，不能被其他线程的其他栈所访问。栈分为三个部分：基本类型变量区，执行环境上下文，操作指令区。栈是由系统编译器自行分配的。<br>3.静态存储区<br>存储所有的class和static变量，包含的都是程序中永远唯一的元素，他跟堆一样也是被所有线程所共享的。全局变量和静态变量的存储是放在一起的，初始化的全局变量和静态变量在一块区域中，未初始化的全局变量和静态变量在相邻的一块区域<br>最有效率算2*8应该是移位运算吧，2左移三位？2&lt;&lt;3，这样应该不会占内存<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> maplength[<span class="number">999</span>][<span class="number">999</span>],mapprice[<span class="number">999</span>][<span class="number">999</span>],n,m,s,d,book[<span class="number">999</span>][<span class="number">999</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dj</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num=<span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m&gt;&gt;s&gt;&gt;d;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)</span><br><span class="line">        maplength[i][j]=<span class="number">999</span>;</span><br><span class="line">    <span class="keyword">int</span> x,y,l,p;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y&gt;&gt;l&gt;&gt;p;</span><br><span class="line">        maplength[x][y]=l;</span><br><span class="line">        mapprice[x][y]=p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
     </article>
     <!-- license  -->
@@ -619,12 +619,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/that/">内存中堆、栈和静态存储区的用法</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/java关键字static、final、this、super总结/">java关键字static、final、this、super总结</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/java关键字static、final、this、super总结/">java关键字static、final、this、super总结</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/that/">内存中堆、栈和静态存储区的用法</a>
         </li>
     
     </ul></div>
