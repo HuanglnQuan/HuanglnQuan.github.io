@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>java关键字static、final、this、super总结 · live the way you like</title>
+    <title>浅谈MVC架构 · live the way you like</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">Huang233&#39;s time</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">java关键字static、final、this、super总结</a>
+                <a href="#" class="post-name">浅谈MVC架构</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            java关键字static、final、this、super总结
+            浅谈MVC架构
             <!-- 404 -->
             
         </h1>
@@ -266,12 +266,12 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">222</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">384</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/11/15</span>
+                    <span class="post-intro-time">2018/11/18</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,8 +395,7 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>  用static声明一个变量或方法，表示它是静态的，在之后可以对变量进行改变或者对静态方法进行重写，但是final表示最终的，由final声明的变量不能被重新赋值，方法不能被重写重构，final类不能被其他类所继承。</p>
-<p>  this和super一般在构造方法中比较常用(this一般用在该类的方法或者构造函数当中，而super一般用在一个继承了其他类的子类的方法或者构造方法中)，this可以调用该类的成员变量或者成员方法，并且可以在方法的任何位置使用，而super则是能对该类的父类的成员变量或方法进行调用，并且要调用super关键字必须在每个方法中的第一行进行调用</p>
+        <p>MVC代表着“model”、“view”、“controller”。使用MVC开发的web应用程序，对搜索引擎更加友好。<br>Model：<br>model基本上是一个C#和VB.net的类<br>model可以被view和controller访问<br>controller通过model向view传输数据<br>view使用model在页面上显示数据<br>View：<br>view层主要是一些ASPX页面文件，不包括后台代码<br>view中可以对所有的页面进行HTML生成和格式化<br>view中可以只用内联代码进行一些动态渲染<br>view中的ASPX请求，只能调用controller中的方法<br>Controller：<br>controller是MVC架构的核心<br>controller基本上是一些主要继承了system.mvc.controller的C#或者VB.NET的类<br>controller中的所有方法都是用来响应浏览器或者view的请求的<br>controller通过model层来向view层的页面传输数据<br>controller使用viewdata向view层传输数据<br>1.浏览器请求<br>用户在浏览器中输入一个网址：<a href="http://xxx.com/home/index/,就产生了一个浏览器请求" target="_blank" rel="noopener">http://xxx.com/home/index/,就产生了一个浏览器请求</a><br>2.Global.asax的作用，MVC路由<br>这个网址首先被Global.asax文件中的application_start（）方法捕获并解释出控制器，方法和ID，此时控制器为home方法为index（）ID为空<br>3.controller层与调用方法<br>现在MVC在controller目录下查找home控制器的方法，不同的控制器中包含不同的方法。此时找到index（）方法，调用这个方法之后，返回一个纯字符串或者被view层展示的HTML代码<br>4.调用view层<br>调用view层会访问view目录下指定的ASPX页面，并且生成一个相应的HTML代码返回给浏览器</p>
 
     </article>
     <!-- license  -->
@@ -405,17 +404,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2018/11/15/that/" title="内存中堆、栈和静态存储区的用法">
-                    <div class="nextTitle">内存中堆、栈和静态存储区的用法</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2018/11/11/hello-world/" title="Hello World">
-                    <div class="prevTitle">Hello World</div>
+                <a href="/2018/11/16/多项式相加链表和线性表实现/" title="多项式相加链表和线性表实现">
+                    <div class="prevTitle">多项式相加链表和线性表实现</div>
                 </a>
             
         </li>
