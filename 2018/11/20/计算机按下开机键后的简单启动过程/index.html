@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>live the way you like</title>
+    <title>计算机按下开机键后的简单启动过程 · live the way you like</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -77,6 +77,8 @@
 
     <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
@@ -201,14 +203,23 @@
 </head>
 
     
-        <body class="home-body">
+        <body class="post-body">
     
     
-<header class="header index-header">
+<header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">Huang233&#39;s time</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">计算机按下开机键后的简单启动过程</a>
+            </div>
+    </div>
     
     <a class="home-link" href="/">Huang233's time</a>
 </header>
@@ -227,17 +238,17 @@ height:50vh;
     <!-- 主页  -->
     
     
-    <!-- 文章页  -->
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Huang233's time
-            <!-- 文章页  -->
+            计算机按下开机键后的简单启动过程
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
@@ -245,12 +256,43 @@ height:50vh;
             <!-- 主页副标题  -->
             
             
-                To strive,to seek,to find,and not to yield
-            
-            <!-- 文章页  -->
+            <!-- 404 -->
             
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">448</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/11/20</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -351,300 +393,46 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/20/计算机按下开机键后的简单启动过程/">
-            
-                <span>计算机按下开机键后的简单启动过程</span>
-        </a>
-        <div class="abstract-content">
-            第一阶段：BIOS  BIOS（Basic Input/Output System）是一组固化到计算机内主板上一个ROM芯片上的程序，它保存着计算机最重要的基本输入输入出的程序、开机后自检程序和系统自启动程序，它可以从CMOS中读写系统设置的具体信息，主要功能是为计算机提供最底层、最直接的硬件设置和控制。  BIOS程序首先检查计算机能否满足运行的基本条件即硬件自检POST（Power on self test），检测系统中的一些关键设备是否存在和能否正常工作，如内存和显卡等等，如果发现了一些致命的错误，就会喇叭发声来报告错误。然后BIOS把控制权交给下一阶段的启动程序，BIOS需要知道...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/20</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/20/CPU存储器，指令执行过程，中断处理-简述/">
-            
-                <span>CPU存储器，指令执行过程，中断处理(简述)</span>
-        </a>
-        <div class="abstract-content">
-            CPU主要有：1.数据寄存器：数据寄存器主要用来保存操作数和运算结果等信息，从而节省了读取操作数所需占用总线和访问存储器的时间。2.变址寄存器：主要用于存放存储单元在段内的偏移量，用他们可以实现多种存储器操作数的寻址方式，为以不同的地址形式访问存储单元提供方便。3.指针存储器：主要用于访问堆栈内的存储单元，并且规定BP为基指针寄存器，用它可以直接存取堆栈中的数据，SP为堆栈指针寄存器，它只可以访问栈顶。（变址寄存器和指针寄存器作为通用寄存器也可以存储操作数和运算结果）4.段寄存器：段寄存器是根据内存分段的管理模式而设置的，内存单元的物理地址是有段寄存器的值和一个偏移量组合而成的，这样就可...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/20</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/18/浅谈MVC架构/">
-            
-                <span>浅谈MVC架构</span>
-        </a>
-        <div class="abstract-content">
-            MVC代表着“model”、“view”、“controller”。使用MVC开发的web应用程序，对搜索引擎更加友好。Model：model基本上是一个C#和VB.net的类model可以被view和controller访问controller通过model向view传输数据view使用model在页面上显示数据View：view层主要是一些ASPX页面文件，不包括后台代码view中可以对所有的页面进行HTML生成和格式化view中可以只用内联代码进行一些动态渲染view中的ASPX请求，只能调用controller中的方法Controller：controller是MVC架构的核心c...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/18</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/16/多项式相加链表和线性表实现/">
-            
-                <span>多项式相加链表和线性表实现</span>
-        </a>
-        <div class="abstract-content">
-            线性表实现:123456789101112131415161718192021222324252627282930313233343536373839#include &lt;iostream&gt;using namespace std;const int MAX = 10000;int main()&#123;    int arr[MAX];    for (int i = 0; i &lt; MAX; ++i) arr[i] = 0;    int t=2, n, m;    int co, exp, max = 0;    cout&lt;&lt;"请输入第一个多项式的项数:"...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/16</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/15/从浏览器输入url到显示网页发生了什么（简要过程）/">
-            
-                <span>从浏览器输入url到显示网页发生了什么（简要过程）</span>
-        </a>
-        <div class="abstract-content">
-            1.输入url2.应用层dns对域名进行解析，现在本地找有没有相应的IP地址，如果有就返回，没有就请求上级dns3.应用层客户端发送http请求4.传输层传输报文5.网络层IP协议查询MAC地址6.数据发送到数据链路层，服务器接收数据7.服务器响应请求返回相应文件8.页面渲染
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>第一阶段：BIOS<br>  BIOS（Basic Input/Output System）是一组固化到计算机内主板上一个ROM芯片上的程序，它保存着计算机最重要的基本输入输入出的程序、开机后自检程序和系统自启动程序，它可以从CMOS中读写系统设置的具体信息，主要功能是为计算机提供最底层、最直接的硬件设置和控制。<br>  BIOS程序首先检查计算机能否满足运行的基本条件即硬件自检POST（Power on self test），检测系统中的一些关键设备是否存在和能否正常工作，如内存和显卡等等，如果发现了一些致命的错误，就会喇叭发声来报告错误。然后BIOS把控制权交给下一阶段的启动程序，BIOS需要知道下一阶段的启动程序具体放在哪一个设备中，所以它需要一个外部设备的排序，优先转交控制权给排在前面的设备，这种排序叫做“启动顺序”。</p>
+<p>第二阶段：主引导记录<br>  BIOS按照启动顺序，把控制权交给排在第一位的储存设备，这时，计算机读取该设备的第一个扇区，也就是读取最前面的512个字节，这最前面的512个字节就叫做“主引导记录”。</p>
+<p>第三阶段：硬盘启动<br>  这是计算机的控制权就要转交给硬盘的某个分区了。</p>
+<p>第四阶段：操作系统<br>分区中会记载操作系统的信息，然后控制权交给操作系统，操作系统的内核首先被载入内存，进而启动相关进程，计算机启动过程便完成了。</p>
 
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/15</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
     </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/15/that/">
-            
-                <span>内存中堆、栈和静态存储区的用法</span>
-        </a>
-        <div class="abstract-content">
-            1.堆堆中存储的全部是对象，每个对象都包含一个与之对应的class，不存储基本类型和对象的引用。在java JVM中只有一个堆区，且该堆区被所有线程共享。堆一般由程序员进行分配和释放。2.栈栈中存储的是基础数据类型和自定义对象的引用，内存中由多个栈区，每个线程都拥有属于他自己的一个栈区，并且栈区中的所有成员都是私有的，不能被其他线程的其他栈所访问。栈分为三个部分：基本类型变量区，执行环境上下文，操作指令区。栈是由系统编译器自行分配的。3.静态存储区存储所有的class和static变量，包含的都是程序中永远唯一的元素，他跟堆一样也是被所有线程所共享的。全局变量和静态变量的存储是放在一起的...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/15</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/15/java关键字static、final、this、super总结/">
-            
-                <span>java关键字static、final、this、super总结</span>
-        </a>
-        <div class="abstract-content">
-              用static声明一个变量或方法，表示它是静态的，在之后可以对变量进行改变或者对静态方法进行重写，但是final表示最终的，由final声明的变量不能被重新赋值，方法不能被重写重构，final类不能被其他类所继承。
-  this和super一般在构造方法中比较常用(this一般用在该类的方法或者构造函数当中，而super一般用在一个继承了其他类的子类的方法或者构造方法中)，this可以调用该类的成员变量或者成员方法，并且可以在方法的任何位置使用，而super则是能对该类的父类的成员变量或方法进行调用，并且要调用super关键字必须在每个方法中的第一行进行调用
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/15</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/11/hello-world/">
-            
-                <span>Hello World</span>
-        </a>
-        <div class="abstract-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/11</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
+    <!-- license  -->
     
     <!-- paginator  -->
-    
-</main>
-            <!-- profile -->
+    <ul class="post-paginator">
+        <li class="next">
             
-            <div class="profile">
-    <img class="profile-avatar" alt="avatar" src="/avatar/this.jpg">
-    <div class="profile-name">Huang233</div>
-    
-    <div class="profile-signature">
-        witness me
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
+        </li>
+        <li class="previous">
             
-                <a href="mailto:969357548@qq.com" class="iconfont-archer email" title="email"></a>
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2018/11/20/CPU存储器，指令执行过程，中断处理-简述/" title="CPU存储器，指令执行过程，中断处理(简述)">
+                    <div class="prevTitle">CPU存储器，指令执行过程，中断处理(简述)</div>
+                </a>
             
-        
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-        
-            
-                <a href="//github.com/HuanglnQuan" class="iconfont-archer github" target="_blank" title="github"></a>
-            
-        
     
-        
-            
-                <span class="iconfont-archer wechat" title="wechat">
-                  
-                  <img class="profile-qr" src="/avatar/wechat.png">
-                </span>
-            
-        
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
     
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
     
 
-    </div>
-    
-    
-        <div class="friends">
-            <div>FRIENDS</div>
-            
-                
-                    <span>
-                        <a href="//www.baidu.com" target="_black">friendA</a>
-                    </span>
-                
-            
-                
-                    <span>
-                        <a href="//www.google.com" target="_black">friendB</a>
-                    </span>
-                
-            
-                
-            
-        </div>
-    
-    
-        <div class="about-me">
-            <a href="/about">ABOUT ME</a>
-        </div>
-    
-</div>
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
             
         </div>
         <footer class="footer footer-unloaded">
@@ -727,6 +515,24 @@ More...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -951,6 +757,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
