@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>内存中堆、栈和静态存储区的用法 · live the way you like</title>
+    <title>操作系统中的几种进程调度策略 · live the way you like</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">Huang233&#39;s time</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">内存中堆、栈和静态存储区的用法</a>
+                <a href="#" class="post-name">操作系统中的几种进程调度策略</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            内存中堆、栈和静态存储区的用法
+            操作系统中的几种进程调度策略
             <!-- 404 -->
             
         </h1>
@@ -266,12 +266,12 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">329</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">831</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/11/15</span>
+                    <span class="post-intro-time">2018/11/23</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,7 +395,12 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>1.堆<br>堆中存储的全部是对象，每个对象都包含一个与之对应的class，不存储基本类型和对象的引用。在java JVM中只有一个堆区，且该堆区被所有线程共享。堆一般由程序员进行分配和释放。<br>2.栈<br>栈中存储的是基础数据类型和自定义对象的引用，内存中由多个栈区，每个线程都拥有属于他自己的一个栈区，并且栈区中的所有成员都是私有的，不能被其他线程的其他栈所访问。栈分为三个部分：基本类型变量区，执行环境上下文，操作指令区。栈是由系统编译器自行分配的。<br>3.静态存储区<br>存储所有的class和static变量，包含的都是程序中永远唯一的元素，他跟堆一样也是被所有线程所共享的。全局变量和静态变量的存储是放在一起的，初始化的全局变量和静态变量在一块区域中，未初始化的全局变量和静态变量在相邻的一块区域<br>最有效率算2*8应该是移位运算吧，2左移三位？2&lt;&lt;3，这样应该不会占内存</p>
+        <p>1.先来先服务调度算法：<br>该算法即可以用与作业调度又可以用与进程调度，作业调度使用该算法便每次调度都从作业队列中选择一个或者多个处于队列最前面的作业，把他调入内存，为它分配资源，创建线程然后放入就绪队列，进程调度使用该算法便每次从就绪队列中选择一个最先进入队列的进程，让它开始运行</p>
+<p>2.短作业短进程优先调度：<br>作业调度使用该算法便从后备队列从选择一个或者多个预计运行时间最短的作业加入到内存中运行，进程调度使用该算法就是从就绪队列中选一个预计运行时间最短的让其开始运行</p>
+<p>3.非抢占式优先权算法：<br>优先权算法就是为每一个作业或者进程分配一个优先级，每次都优先开始优先级较高的作业或者线程。非抢占式优先权算法就是当系统把处理机分配给一个优先级最高的进程之后，该进程便会一直执行下去直到进程运行完或者某事件使该进程放弃处理机时，不会因为就绪队列中加入了一个优先级更高的进程而放弃执行该进程</p>
+<p>4.抢占式优先权算法：<br>就跟第3个差不多，只不过当原最高优先级进程运行时，如果就绪队列中加入了一个优先级更高的进程，系统就会停止原进程，让新的优先级最高的进程投入执行</p>
+<p>5.高相应比优先调度算法：<br>此算法与之前的优先权和短作业算法基本相似，只不过优先权的计算方法为（等待时间+要求服务时间）/要求服务时间，即每个进程的优先权会随等待被执行时间而改变，这样避免了一个作业或者进程因为预计执行时间太长而一直不被执行，每个作业的优先级随着等待时间增长而升高</p>
+<p>6.多级反馈队列调度算法：<br>该算法基于时间片轮转法，简单来说就是为每一个进程都分配一个时间片段，当执行一个进程的时间片用完了之后便把该进程放到就绪队列的最末尾，然后继续把时间片分配给下一个线程，使得每一个线程都可以被执行<br>多级反馈就是设置了多个就绪队列，算是对前面几种算法的一个结合改进吧，并且每个就绪队列的优先级都不同，优先级高的所分配的时间片就长，反之则较低。假设第一队列中的一个进程在时间片内执行完了便会撤离系统，如果没有执行完便会被加入到第二队列的末尾，等待下一次执行，如果第二队列中分配的时间片内还是没有完成就加入到第三队列末尾，以此类推。</p>
 
     </article>
     <!-- license  -->
@@ -404,17 +409,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2018/11/15/从浏览器输入url到显示网页发生了什么（简要过程）/" title="从浏览器输入url到显示网页发生了什么（简要过程）">
-                    <div class="nextTitle">从浏览器输入url到显示网页发生了什么（简要过程）</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2018/11/15/java关键字static、final、this、super总结/" title="java关键字static、final、this、super总结">
-                    <div class="prevTitle">java关键字static、final、this、super总结</div>
+                <a href="/2018/11/23/当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法/" title="当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法">
+                    <div class="prevTitle">当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法</div>
                 </a>
             
         </li>

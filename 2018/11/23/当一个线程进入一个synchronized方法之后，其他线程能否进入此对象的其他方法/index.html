@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>内存中堆、栈和静态存储区的用法 · live the way you like</title>
+    <title>当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法 · live the way you like</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">Huang233&#39;s time</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">内存中堆、栈和静态存储区的用法</a>
+                <a href="#" class="post-name">当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            内存中堆、栈和静态存储区的用法
+            当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法
             <!-- 404 -->
             
         </h1>
@@ -266,12 +266,12 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">329</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">298</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/11/15</span>
+                    <span class="post-intro-time">2018/11/23</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,7 +395,10 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>1.堆<br>堆中存储的全部是对象，每个对象都包含一个与之对应的class，不存储基本类型和对象的引用。在java JVM中只有一个堆区，且该堆区被所有线程共享。堆一般由程序员进行分配和释放。<br>2.栈<br>栈中存储的是基础数据类型和自定义对象的引用，内存中由多个栈区，每个线程都拥有属于他自己的一个栈区，并且栈区中的所有成员都是私有的，不能被其他线程的其他栈所访问。栈分为三个部分：基本类型变量区，执行环境上下文，操作指令区。栈是由系统编译器自行分配的。<br>3.静态存储区<br>存储所有的class和static变量，包含的都是程序中永远唯一的元素，他跟堆一样也是被所有线程所共享的。全局变量和静态变量的存储是放在一起的，初始化的全局变量和静态变量在一块区域中，未初始化的全局变量和静态变量在相邻的一块区域<br>最有效率算2*8应该是移位运算吧，2左移三位？2&lt;&lt;3，这样应该不会占内存</p>
+        <p>分为几种情况：<br>1.其他方法前如果没有加synchronized关键字，就可以进入，因为其他的方法并没有被同步锁上锁，可以被正常访问</p>
+<p>2.如果这个synchronized方法内部调用了wait，则可以进入其他synchronized方法，因为在方法中运行到wait时，该线程便退出了运行状态，对象的同步锁就被解开了</p>
+<p>3.如果其他方法都加了synchronized方法并且该方法内部没有调用wait，则不能进入其他方法，同步锁的标志是一个对象，线程进入一个synchronized方法时，同步锁便被上锁了，包括该对象的所有其他synchronized方法</p>
+<p>4.如果其他方法是static的，它用的同步锁是当前类的字节码，与非静态方法不能同步，所以可以进入其他静态方法。非静态方法可以使用this来进行同步，但是调用静态方法时，对象实例不一定被创建，所以不能使用this进行同步，而是使用一个class对象进行同步。所以两者同步锁的对象是不同的</p>
 
     </article>
     <!-- license  -->
@@ -405,16 +408,16 @@ height:50vh;
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href="/2018/11/15/从浏览器输入url到显示网页发生了什么（简要过程）/" title="从浏览器输入url到显示网页发生了什么（简要过程）">
-                    <div class="nextTitle">从浏览器输入url到显示网页发生了什么（简要过程）</div>
+                <a href="/2018/11/23/操作系统中的几种进程调度策略/" title="操作系统中的几种进程调度策略">
+                    <div class="nextTitle">操作系统中的几种进程调度策略</div>
                 </a>
             
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2018/11/15/java关键字static、final、this、super总结/" title="java关键字static、final、this、super总结">
-                    <div class="prevTitle">java关键字static、final、this、super总结</div>
+                <a href="/2018/11/20/计算机按下开机键后的简单启动过程/" title="计算机按下开机键后的简单启动过程">
+                    <div class="prevTitle">计算机按下开机键后的简单启动过程</div>
                 </a>
             
         </li>

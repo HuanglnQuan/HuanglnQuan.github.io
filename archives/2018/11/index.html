@@ -346,6 +346,57 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2018/11/23/操作系统中的几种进程调度策略/">
+            
+                <span>操作系统中的几种进程调度策略</span>
+        </a>
+        <div class="abstract-content">
+            1.先来先服务调度算法：该算法即可以用与作业调度又可以用与进程调度，作业调度使用该算法便每次调度都从作业队列中选择一个或者多个处于队列最前面的作业，把他调入内存，为它分配资源，创建线程然后放入就绪队列，进程调度使用该算法便每次从就绪队列中选择一个最先进入队列的进程，让它开始运行
+2.短作业短进程优先调度：作业调度使用该算法便从后备队列从选择一个或者多个预计运行时间最短的作业加入到内存中运行，进程调度使用该算法就是从就绪队列中选一个预计运行时间最短的让其开始运行
+3.非抢占式优先权算法：优先权算法就是为每一个作业或者进程分配一个优先级，每次都优先开始优先级较高的作业或者线程。非抢占式优先权...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/23</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2018/11/23/当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法/">
+            
+                <span>当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法</span>
+        </a>
+        <div class="abstract-content">
+            分为几种情况：1.其他方法前如果没有加synchronized关键字，就可以进入，因为其他的方法并没有被同步锁上锁，可以被正常访问
+2.如果这个synchronized方法内部调用了wait，则可以进入其他synchronized方法，因为在方法中运行到wait时，该线程便退出了运行状态，对象的同步锁就被解开了
+3.如果其他方法都加了synchronized方法并且该方法内部没有调用wait，则不能进入其他方法，同步锁的标志是一个对象，线程进入一个synchronized方法时，同步锁便被上锁了，包括该对象的所有其他synchronized方法
+4.如果其他方法是static的，它用的同...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/23</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2018/11/20/计算机按下开机键后的简单启动过程/">
             
                 <span>计算机按下开机键后的简单启动过程</span>
@@ -706,9 +757,33 @@ More...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 8
+        Total : 10
         </div>
         <!-- search  -->
         
@@ -719,22 +794,18 @@ More...
     
     
     
-    <div class="archive-year"> Invalid date </div>
+    <div class="archive-year"> 2018 </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2018/11/11/hello-world/">Hello World</a>
+            <span class="archive-post-date">11/23</span><a class="archive-post-title" href="/2018/11/23/操作系统中的几种进程调度策略/">操作系统中的几种进程调度策略</a>
         </li>
     
     
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2018 </div>
-    <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/23</span><a class="archive-post-title" href="/2018/11/23/当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法/">当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -769,6 +840,20 @@ More...
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/that/">内存中堆、栈和静态存储区的用法</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2018/11/11/hello-world/">Hello World</a>
         </li>
     
     </ul></div>
