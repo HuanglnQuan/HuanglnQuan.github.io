@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>计算机按下开机键后的简单启动过程 · live the way you like</title>
+    <title>最小生成树Prim算法 · live the way you like</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">Huang233&#39;s time</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">计算机按下开机键后的简单启动过程</a>
+                <a href="#" class="post-name">最小生成树Prim算法</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            计算机按下开机键后的简单启动过程
+            最小生成树Prim算法
             <!-- 404 -->
             
         </h1>
@@ -266,12 +266,12 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">448</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">496</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/11/20</span>
+                    <span class="post-intro-time">2018/11/24</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,10 +395,8 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>第一阶段：BIOS<br>  BIOS（Basic Input/Output System）是一组固化到计算机内主板上一个ROM芯片上的程序，它保存着计算机最重要的基本输入输入出的程序、开机后自检程序和系统自启动程序，它可以从CMOS中读写系统设置的具体信息，主要功能是为计算机提供最底层、最直接的硬件设置和控制。<br>  BIOS程序首先检查计算机能否满足运行的基本条件即硬件自检POST（Power on self test），检测系统中的一些关键设备是否存在和能否正常工作，如内存和显卡等等，如果发现了一些致命的错误，就会喇叭发声来报告错误。然后BIOS把控制权交给下一阶段的启动程序，BIOS需要知道下一阶段的启动程序具体放在哪一个设备中，所以它需要一个外部设备的排序，优先转交控制权给排在前面的设备，这种排序叫做“启动顺序”。</p>
-<p>第二阶段：主引导记录<br>  BIOS按照启动顺序，把控制权交给排在第一位的储存设备，这时，计算机读取该设备的第一个扇区，也就是读取最前面的512个字节，这最前面的512个字节就叫做“主引导记录”。</p>
-<p>第三阶段：硬盘启动<br>  这是计算机的控制权就要转交给硬盘的某个分区了。</p>
-<p>第四阶段：操作系统<br>分区中会记载操作系统的信息，然后控制权交给操作系统，操作系统的内核首先被载入内存，进而启动相关进程，计算机启动过程便完成了。</p>
+        <pre><code>最小生成树Prim算法实现，输出最小生成树总路径长
+</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> mapcost[<span class="number">1024</span>][<span class="number">1024</span>];        <span class="comment">//存储输入的地图信息，每条边的权值</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> lowcost[<span class="number">1024</span>],book[<span class="number">1024</span>];       <span class="comment">//lowcost为辅助数组，动态记录从源点到个点的最短距离，book数组用来标记一个点是否在已生成树中</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">prim</span><span class="params">(<span class="keyword">int</span> n)</span>                       <span class="comment">//prim算法，参数为点的个数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)            <span class="comment">//lowcost数组初始化，每个点的lowcost值为用户输入信息中从源点（源点为1）到个点的距离</span></span><br><span class="line">    &#123;</span><br><span class="line">        lowcost[i]=mapcost[<span class="number">1</span>][i];</span><br><span class="line">    &#125;</span><br><span class="line">    book[<span class="number">1</span>]=<span class="number">1</span>;                         <span class="comment">//从1开始，把1收入到生成树中</span></span><br><span class="line">    <span class="keyword">int</span> mins,index,t;                   <span class="comment">//mins用来记录最小值，index记录lowcost最小值的点</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        mins=<span class="number">999</span>;</span><br><span class="line">        <span class="keyword">for</span>(t=<span class="number">1</span>; t&lt;=n; t++)                 <span class="comment">//寻找已生成树中能够到达的权值最小的边的点</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(book[t]==<span class="number">0</span>&amp;&amp;mins&gt;lowcost[t])               </span><br><span class="line">            &#123;</span><br><span class="line">                mins=lowcost[t];</span><br><span class="line">                index=t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sum+=lowcost[index];                   <span class="comment">//记录路径长度</span></span><br><span class="line">        book[index]=<span class="number">1</span>;                           <span class="comment">//将index点加入到生成树中</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> g=<span class="number">1</span>; g&lt;=n; g++)      <span class="comment">//因为生成树中多了一个节点index，所有需要重新调整lowcost数组，lowcost数组始终记录从已生成树中到其余个点的最短距离</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(book[g]==<span class="number">0</span>&amp;&amp;mapcost[index][g]&lt;lowcost[g])</span><br><span class="line">            &#123;</span><br><span class="line">                lowcost[g]=mapcost[index][g];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)          <span class="comment">//处理未连通的情况</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(book[j]==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">if</span>(m&lt;n<span class="number">-1</span>)                <span class="comment">//不能连通图的情况</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">int</span> x,y,z;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;=n; j++)         <span class="comment">//初始化mapcost数组</span></span><br><span class="line">            mapcost[i][j]=<span class="number">999</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m; i++)             <span class="comment">//因为是无向图，所以需要xy，yx赋两次值</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y&gt;&gt;z;</span><br><span class="line">        mapcost[x][y]=z;</span><br><span class="line">        mapcost[y][x]=z;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> re=prim(n);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;re;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </article>
     <!-- license  -->
@@ -407,17 +405,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2018/11/23/当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法/" title="当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法">
-                    <div class="nextTitle">当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2018/11/20/CPU存储器，指令执行过程，中断处理-简述/" title="CPU存储器，指令执行过程，中断处理(简述)">
-                    <div class="prevTitle">CPU存储器，指令执行过程，中断处理(简述)</div>
+                <a href="/2018/11/24/简述网桥、交换机、路由器、网关在网络中的作用/" title="简述网桥、交换机、路由器、网关在网络中的作用">
+                    <div class="prevTitle">简述网桥、交换机、路由器、网关在网络中的作用</div>
                 </a>
             
         </li>
