@@ -346,6 +346,29 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2018/11/15/that/">
+            
+                <span>内存中堆、栈和静态存储区的用法</span>
+        </a>
+        <div class="abstract-content">
+            1.堆堆中存储的全部是对象，每个对象都包含一个与之对应的class，不存储基本类型和对象的引用。在java JVM中只有一个堆区，且该堆区被所有线程共享。堆一般由程序员进行分配和释放。2.栈栈中存储的是基础数据类型和自定义对象的引用，内存中由多个栈区，每个线程都拥有属于他自己的一个栈区，并且栈区中的所有成员都是私有的，不能被其他线程的其他栈所访问。栈分为三个部分：基本类型变量区，执行环境上下文，操作指令区。栈是由系统编译器自行分配的。3.静态存储区存储所有的class和static变量，包含的都是程序中永远唯一的元素，他跟堆一样也是被所有线程所共享的。全局变量和静态变量的存储是放在一起的...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/15</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2018/11/15/java关键字static、final、this、super总结/">
             
                 <span>java关键字static、final、this、super总结</span>
@@ -585,9 +608,18 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 11
+        Total : 12
         </div>
         <!-- search  -->
         
@@ -600,6 +632,11 @@
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/07</span><a class="archive-post-title" href="/2018/12/07/几种基本的排序算法/">几种基本的排序算法</a>
+        </li>
     
     
         <li class="archive-post-item">

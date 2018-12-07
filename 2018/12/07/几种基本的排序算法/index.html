@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Mac Huang">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Mac Huang">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>几种基本的排序算法 · live the way you like</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin="">
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin="">
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">Huang233&#39;s time</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">几种基本的排序算法</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href="/">Huang233's time</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            几种基本的排序算法
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">2.3k</span>阅读时长: <span class="post-count reading-time">9 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/12/07</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>冒泡排序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">冒泡排序：</span></span><br><span class="line"><span class="comment">每次比较相邻两个元素的值然后进行交换，</span></span><br><span class="line"><span class="comment">因为每一趟都是把当前长度序列中的最大值放到最后面，因此n个元素一共需要进行n-1趟。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Bubble_sort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> acount=<span class="number">0</span>;             <span class="comment">//计数器，累计交换的次数</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n<span class="number">-1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> index=<span class="number">0</span>;           <span class="comment">//此处设一个标记，如果进行下个for循环之后index值还是0代表此时序列已经是有序的无序继续下去</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;n-i<span class="number">-1</span>; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(data[j]&gt;data[j+<span class="number">1</span>])             <span class="comment">//相邻两元素作比较</span></span><br><span class="line">            &#123;</span><br><span class="line">                swap(data[j],data[j+<span class="number">1</span>]);</span><br><span class="line">                acount++;</span><br><span class="line">                index=<span class="number">1</span>;                        <span class="comment">//只要有一次交换就index为1，表示当前序列不是有序的</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(index==<span class="number">0</span>)                        <span class="comment">//如果当前序列已经有序，没有进行交换就退出循环，排序完成。</span></span><br><span class="line">            <span class="keyword">return</span> acount;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> acount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>插入排序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">插入排序：</span></span><br><span class="line"><span class="comment">每次从1开始，假设是一个抓牌的过程，首先手里有一张牌，就是0号元素</span></span><br><span class="line"><span class="comment">然后每次从待排序数组中摸一张牌，与手中所有的牌进行比较，找到一个合适的位置就插入</span></span><br><span class="line"><span class="comment">直到所有的元素都已经插入在手中</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Inserting_sort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> acount=<span class="number">0</span>,j;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;n; i++)                <span class="comment">//从1开始，假设手中已经有一张牌</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> temp=data[i];                  <span class="comment">//temp记录将要插入的元素的值</span></span><br><span class="line">        <span class="keyword">for</span>(j=i; j&gt;<span class="number">0</span>&amp;&amp;data[j<span class="number">-1</span>]&gt;temp; j--)          <span class="comment">//从已排序的最后一个元素开始，依次与将要插入的元素比较，如果比它大，就将该元素后移</span></span><br><span class="line">        &#123;</span><br><span class="line">            data[j]=data[j<span class="number">-1</span>];                      <span class="comment">//直到找到一个适合新插入元素的位置</span></span><br><span class="line">            acount++;</span><br><span class="line">        &#125;</span><br><span class="line">        data[j]=temp;                        <span class="comment">//此处的data[j]是小于temp的，所以把要插入元素插入在这里</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> acount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>希尔排序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">希尔排序：</span></span><br><span class="line"><span class="comment">对插入排序的一种改善，利用了插入排序的简单同时客服了每次只交换相邻元素减少一个逆序对的缺点</span></span><br><span class="line"><span class="comment">每次都设置一个 增量，这样每次交换的元素就会相距一个增量的长度，就可以一次性减少多个逆序对(排序的实质其实就是减少逆序对个数</span></span><br><span class="line"><span class="comment">可以从前面的饿冒泡和插入看出，存在几个逆序对，则需要交换几次)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Heal_sort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> acount=<span class="number">0</span>,j;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> d=n/<span class="number">2</span>; d&gt;<span class="number">0</span>; d/=<span class="number">2</span>)           <span class="comment">//d为增量，初始设置为n/2，之后每次除以2直到增量为1</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=d; i&lt;n; i++)              <span class="comment">//这段代码其实就是把之前的插入排序的1全部用增量d代替</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> temp=data[i];                           <span class="comment">//temp记录将要插入的元素</span></span><br><span class="line">            <span class="keyword">for</span>(j=i; j&gt;=d&amp;&amp;data[j-d]&gt;temp; j-=d)        <span class="comment">//注意此处j&gt;=d，因为是从i=d开始的，在第一次的时候已经保证了d-d号元素的顺序，所以后面只要比较到j=d即可</span></span><br><span class="line">            &#123;</span><br><span class="line">                data[j]=data[j-d];</span><br><span class="line">                acount++;</span><br><span class="line">            &#125;</span><br><span class="line">            data[j]=temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> acount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>堆排序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">堆排序：</span></span><br><span class="line"><span class="comment">主要是利用最大堆和最小堆的特性进行排序，</span></span><br><span class="line"><span class="comment">首先根据给出的数组序列构建一个最大堆（最大值在data[0]处），然后每次把最大堆的根节点与最后一个元素进行交换</span></span><br><span class="line"><span class="comment">此时最大值就在树的最后一个叶节点处，然后把这个叶节点砍掉，</span></span><br><span class="line"><span class="comment">因为此时把原来树的最后一个元素交换到了根节点处，所以需要重新构最大堆</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BuildMaxheap</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> t,<span class="keyword">int</span> n)</span>       <span class="comment">//构建最大堆的函数，t表示已t点为根节点建立最大堆(t节点的子树都是满足最大堆性质的)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ch,pa,temp=data[t];                  <span class="comment">//temp保存根节点的值</span></span><br><span class="line">    <span class="keyword">for</span>(pa=t; pa*<span class="number">2</span>+<span class="number">1</span>&lt;n; pa=ch)               <span class="comment">//从根节点开始，首先在它的孩子中找一个最大值(因为下标从0开始，所以左孩子为pa*2+1)</span></span><br><span class="line">    &#123;</span><br><span class="line">        ch=<span class="number">2</span>*pa+<span class="number">1</span>;                            <span class="comment">//先假设左孩子较大</span></span><br><span class="line">        <span class="keyword">if</span>(data[ch]&lt;data[ch+<span class="number">1</span>]&amp;&amp;ch+<span class="number">1</span>&lt;n)         <span class="comment">//如果右孩子大于左孩子就CH++</span></span><br><span class="line">            ch++;</span><br><span class="line">        <span class="keyword">if</span>(temp&gt;=data[ch])                     <span class="comment">//如果根节点的值大于它所有孩子的值，说明它的位置是正确的，直接跳出循环</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">else</span>                                   <span class="comment">//如果根节点的值小于它最大孩子的值，就把最大孩子的值赋给根节点，</span></span><br><span class="line">            data[pa]=data[ch];                  <span class="comment">//然后pa=ch表示需要再在最大孩子的子树中进行比较，看之前temp的值会不会比这个孩子的最大孩子要小</span></span><br><span class="line">    &#125;</span><br><span class="line">    data[pa]=temp;                               <span class="comment">//把temp插入到正确的位置上</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Heap_sort</span><span class="params">(<span class="keyword">int</span> datas[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n/<span class="number">2</span><span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)                 <span class="comment">//首先从最后一个有孩子的根节点开始，构建最大堆，每次减一（因为下标从0开始，所以初始i=n/2-1）</span></span><br><span class="line">        BuildMaxheap(datas,i,n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=n<span class="number">-1</span>; j&gt;<span class="number">0</span>; j--)                      <span class="comment">//最大堆构建好了之后，交换最大值和最后一个节点的值，然后把树的长度减一</span></span><br><span class="line">    &#123;</span><br><span class="line">        swap(datas[<span class="number">0</span>],datas[j]);                  <span class="comment">//然后重新构建最大堆</span></span><br><span class="line">        BuildMaxheap(datas,<span class="number">0</span>,j);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>归并排序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">归并排序：</span></span><br><span class="line"><span class="comment">主要是利用分而治之的思想，把整个数组不断的分割成平均两份，直到每一小份的长度为1。</span></span><br><span class="line"><span class="comment">然后再借用一个辅助数组一步步的进行合并直到最后合并成整个数组，再把这个辅助数组赋给原数组</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge_sort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> tmp[],<span class="keyword">int</span> left,<span class="keyword">int</span> right,<span class="keyword">int</span> rightend)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num=rightend-left+<span class="number">1</span>,leftend=right<span class="number">-1</span>,demo=left;   <span class="comment">//num记录该序列中元素个数，leftend表示最短序列的末尾，demo用于辅助数组</span></span><br><span class="line">    <span class="keyword">while</span>(left&lt;=leftend&amp;&amp;right&lt;=rightend)                <span class="comment">//当左边序列和右边序列都没有比较完的时候进行循环</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(data[left]&lt;data[right])      <span class="comment">//如果左序列left处的值小于右序列right处的值，就把左序列left处的值加入到辅助数组中，然后left和demo都向前进一位</span></span><br><span class="line">            tmp[demo++]=data[left++];</span><br><span class="line">        <span class="keyword">else</span>                             <span class="comment">//这个就是右序列right处的值小于左序列left处的值的情况，类似</span></span><br><span class="line">            tmp[demo++]=data[right++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(left&lt;=leftend)          <span class="comment">//这里我们要处理其中一个序列还没有比较完的情况，如果是左边left还没有到达leftend处就把剩余的所有元素加入到辅助数组后面</span></span><br><span class="line">        tmp[demo++]=data[left++];</span><br><span class="line">    <span class="keyword">while</span>(right&lt;=rightend)           <span class="comment">//右序列还有剩余的情况(哪边有剩余就表示剩余的元素比另一边所有的元素都大了，所有直接插入即可)</span></span><br><span class="line">        tmp[demo++]=data[right++];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;num; i++,rightend--)   <span class="comment">//把辅助数组复制给原数组</span></span><br><span class="line">        data[rightend]=tmp[rightend];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> tmp[],<span class="keyword">int</span> left,<span class="keyword">int</span> rightend)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left&lt;rightend)                    <span class="comment">//当序列中的元素大于一个是执行</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> center=(left+rightend)/<span class="number">2</span>;</span><br><span class="line">        Merge(data,tmp,left,center);         <span class="comment">//归并左边</span></span><br><span class="line">        Merge(data,tmp,center+<span class="number">1</span>,rightend);     <span class="comment">//归并右边</span></span><br><span class="line">        Merge_sort(data,tmp,left,center+<span class="number">1</span>,rightend);      <span class="comment">//进行合并</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>快速排序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">快速排序：</span></span><br><span class="line"><span class="comment">首先要选取一个主元，然后依据主元的值把比主元小的数放到主元左边，其余的放到主元的右边</span></span><br><span class="line"><span class="comment">也是利用一个分而治之的递归方法。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">midum3</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span>       <span class="comment">//选取主元的函数，选取最左端，中间，最右端的中位值</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> center=(left+right)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(data[left]&gt;data[center])</span><br><span class="line">        swap(data[left],data[center]);</span><br><span class="line">    <span class="keyword">if</span>(data[left]&gt;data[right])</span><br><span class="line">        swap(data[left],data[right]);</span><br><span class="line">    <span class="keyword">if</span>(data[center]&gt;data[right])</span><br><span class="line">        swap(data[center],data[right]);         <span class="comment">//三个if之后到这里最左端&lt;=中间&lt;=最右端</span></span><br><span class="line">    swap(data[center],data[right<span class="number">-1</span>]);         <span class="comment">//把中位值隐藏都最右端处</span></span><br><span class="line">    <span class="keyword">return</span> data[right<span class="number">-1</span>];                  <span class="comment">//返回主元</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left&lt;=right)       <span class="comment">//当前序列元素个数不为0时执行</span></span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">int</span> cutoff=<span class="number">10</span>;          <span class="comment">//这是一个阈值，当前序列元素个数小于该值时可以使用简单的插入排序，这样可以节省时间。因为元素较少时插入可能会比递归快</span></span><br><span class="line">    <span class="keyword">if</span>(right-left&lt;cutoff)</span><br><span class="line">        Inserting_sort(data+left,right-left+<span class="number">1</span>);       <span class="comment">//小于阈值就调用插入排序，从data+left开始至后面的right-left+1个元素</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">int</span> pivot=midum3(data,left,right);          <span class="comment">//选取主元</span></span><br><span class="line">    <span class="keyword">int</span> i=left,j=right<span class="number">-1</span>;                     <span class="comment">//i为左边的哨兵，j为右边的哨兵</span></span><br><span class="line">    <span class="keyword">while</span>(i&lt;j)         <span class="comment">//当i=j时就退出循环</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(data[++i]&lt;=pivot&amp;&amp;i&lt;j);        <span class="comment">//注意此处的顺序很重要，根据你主元的位置来决定方向，如果主元是0，就从右边开始，如果主元在右边就先从左边开始</span></span><br><span class="line">        <span class="keyword">while</span>(data[--j]&gt;=pivot&amp;&amp;i&lt;j);          <span class="comment">//右边循环直到一个比主元小的值，左边循环直到一个比主元大的值</span></span><br><span class="line">        <span class="keyword">if</span>(i&lt;j)                              <span class="comment">//i&lt;j就交换两元素，一直直到i==j</span></span><br><span class="line">            swap(data[i],data[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    swap(data[i],data[right<span class="number">-1</span>]);              <span class="comment">//交换i处元素与主元，给主元重新定位</span></span><br><span class="line">    quicksort(data,left,i<span class="number">-1</span>);                 <span class="comment">//递归对主元的左边进行排序</span></span><br><span class="line">    quicksort(data,i+<span class="number">1</span>,right);                 <span class="comment">//递归对主元的右边进行排序（此时不再包括主元进去）</span></span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="keyword">int</span> data[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    quicksort(data,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+    </article>
+    <!-- license  -->
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2018/11/24/最小生成树Prim算法/" title="最小生成树Prim算法">
+                    <div class="prevTitle">最小生成树Prim算法</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:969357548@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/HuanglnQuan" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title="wechat">
+                  
+                  <img class="profile-qr" src="/avatar/wechat.png">
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 12
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/07</span><a class="archive-post-title" href="/2018/12/07/几种基本的排序算法/">几种基本的排序算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/24</span><a class="archive-post-title" href="/2018/11/24/最小生成树Prim算法/">最小生成树Prim算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/24</span><a class="archive-post-title" href="/2018/11/24/简述网桥、交换机、路由器、网关在网络中的作用/">简述网桥、交换机、路由器、网关在网络中的作用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/23</span><a class="archive-post-title" href="/2018/11/23/当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法/">当一个线程进入一个synchronized方法之后，其他线程能否进入此对象的其他方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/23</span><a class="archive-post-title" href="/2018/11/23/操作系统中的几种进程调度策略/">操作系统中的几种进程调度策略</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/20</span><a class="archive-post-title" href="/2018/11/20/CPU存储器，指令执行过程，中断处理-简述/">CPU存储器，指令执行过程，中断处理(简述)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/20</span><a class="archive-post-title" href="/2018/11/20/计算机按下开机键后的简单启动过程/">计算机按下开机键后的简单启动过程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/18</span><a class="archive-post-title" href="/2018/11/18/浅谈MVC架构/">浅谈MVC架构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/16</span><a class="archive-post-title" href="/2018/11/16/多项式相加链表和线性表实现/">多项式相加链表和线性表实现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/从浏览器输入url到显示网页发生了什么（简要过程）/">从浏览器输入url到显示网页发生了什么（简要过程）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/java关键字static、final、this、super总结/">java关键字static、final、this、super总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/that/">内存中堆、栈和静态存储区的用法</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Mac Huang"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
