@@ -395,8 +395,8 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>  以前在使用jdbc对数据库进行操作的时候一般都会先加载驱动<br>    Class.forName(“com.mysql.jdbc.Driver”);</p>
-<p>  但是后面突然会出现警告，说这个方法已经被遗弃了，然后看了看DriverManager类的源码发现有一行注释<br>    </p><p>Applications no longer need to explicitly load JDBC drivers using <code>Class.forName()</code>.</p>
+        <p>  以前在使用jdbc对数据库进行操作的时候一般都会先加载驱动<br>    <code>Class.forName(“com.mysql.jdbc.Driver”);</code></p>
+<p>  但是后面突然会出现警告，说这个方法已经被遗弃了，然后看了看DriverManager类的源码发现有一行注释<br>    <code>Applications no longer need to explicitly load JDBC drivers using Class.forName()</code>.</p>
 <p>  意思就是不需要使用这个方法加载驱动了，所以之后一直也没有用过，但是今天在搭建一个JavaWeb项目的时候连接数据库时也没有加载这个驱动，然后就一直出现问题，无法成功连接数据库，最后花了好长时间发现是这里的问题，在使用servlet访问的时候必须要加载这个驱动。还不知道是为什么</p>
 
     </article>
@@ -678,8 +678,6 @@ top:50vh;
     
     
     
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 13
@@ -762,12 +760,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/java关键字static、final、this、super总结/">java关键字static、final、this、super总结</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/that/">内存中堆、栈和静态存储区的用法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/that/">内存中堆、栈和静态存储区的用法</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/java关键字static、final、this、super总结/">java关键字static、final、this、super总结</a>
         </li>
     
     </ul></div>
