@@ -395,7 +395,7 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <body><br>    <h2>阿里云服务器上搭建MySQL</h2><br>     <p><br>        最近因为一个Web项目需要用到数据库，所以本着试一试的心态买了个阿里云的学生优惠服务器，然后开始了我艰难的数据库搭建，在网上找了很多资料也看了很多个教程，但是最后都没成功，最后终于在茫茫大海中找到了一篇优质博客…<br>        <br><br>        <br><br>        <a href="https://yq.aliyun.com/articles/47237" target="_blank" rel="noopener">    这里就是你想要的东西</a><br>    </p><br><p><br><br>    上面的博客实测是可以成功搭建好MySQL的，但是唯一的问题就是无法成功进行远程连接数据库，Java连接后台报错 Connection failuer。按照网上的各种方法什么更改wait_timeout和interactive_timeout之后都没用。然后也一一排除了用户权限的问题，3306端口开放的问题，服务器和客户端防火墙的问题，发现都是没问题的。<br><br><br><br>    最后历经千辛万苦终于找到了问题！！！<br><br>    问题出在了阿里云的服务器上，由于是学生优惠的服务器，所以有些权限是需要自行设置的,需要我自行设置<strong>服务器的安全组规则</strong><br><br><br></p><br><p><br>    我们需要在内网入方向规则里面添加下面这条规则<br>    <br><br>    <img src="/2019/03/01/阿里云服务器搭建MySQL及远程访问-1/img1.png" alt=""><br><br><br><br>    然后在内网出方向规则也加一条<br>    <br><br>    <img src="/2019/03/01/阿里云服务器搭建MySQL及远程访问-1/img2.png" alt=""><br></p><br><p>这样应该就没有问题了，可以成功连接数据库</p><br></body>
+        <body><br>    <h2>阿里云服务器上搭建MySQL</h2><br>     <p><br>        最近因为一个Web项目需要用到数据库，所以本着试一试的心态买了个阿里云的学生优惠服务器，然后开始了我艰难的数据库搭建，在网上找了很多资料也看了很多个教程，但是最后都没成功，最后终于在茫茫大海中找到了一篇优质博客…<br>        <br><br>        <a href="https://yq.aliyun.com/articles/47237" target="_blank" rel="noopener">    这里就是你想要的东西</a><br>    </p><br><p><br><br>    上面的博客实测是可以成功搭建好MySQL的，但是唯一的问题就是无法成功进行远程连接数据库，Java连接后台报错 Connection failuer。按照网上的各种方法什么更改wait_timeout和interactive_timeout之后都没用。然后也一一排除了用户权限的问题，3306端口开放的问题，服务器和客户端防火墙的问题，发现都是没问题的。<br><br>    最后历经千辛万苦终于找到了问题！！！<br><br>    问题出在了阿里云的服务器上，由于是学生优惠的服务器，所以有些权限是需要自行设置的,需要我自行设置<strong>服务器的安全组规则</strong><br><br><br></p><br><p><br>    我们需要在内网入方向规则里面添加下面这条规则<br>    <br><br>    <img src="/2019/03/01/阿里云服务器搭建MySQL及远程访问-1/img1.png" alt=""><br><br><br><br>    然后在内网出方向规则也加一条<br>    <br><br>    <img src="/2019/03/01/阿里云服务器搭建MySQL及远程访问-1/img2.png" alt=""><br></p><br><p>这样应该就没有问题了，可以成功连接数据库</p><br></body>
     </article>
     <!-- license  -->
     
@@ -540,6 +540,10 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
     
     
     
