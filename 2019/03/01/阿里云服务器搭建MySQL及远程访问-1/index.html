@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>从浏览器输入url到显示网页发生了什么（简要过程） · live the way you like</title>
+    <title>阿里云服务器搭建MySQL及远程访问 · live the way you like</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">Huang233&#39;s time</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">从浏览器输入url到显示网页发生了什么（简要过程）</a>
+                <a href="#" class="post-name">阿里云服务器搭建MySQL及远程访问</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            从浏览器输入url到显示网页发生了什么（简要过程）
+            阿里云服务器搭建MySQL及远程访问
             <!-- 404 -->
             
         </h1>
@@ -266,12 +266,12 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">108</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">354</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/11/15</span>
+                    <span class="post-intro-time">2019/03/01</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,8 +395,7 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>1.输入url<br>2.应用层dns对域名进行解析，现在本地找有没有相应的IP地址，如果有就返回，没有就请求上级dns<br>3.应用层客户端发送http请求<br>4.传输层传输报文<br>5.网络层IP协议查询MAC地址<br>6.数据发送到数据链路层，服务器接收数据<br>7.服务器响应请求返回相应文件<br>8.页面渲染</p>
-
+        <body><br>    <h2>阿里云服务器上搭建MySQL</h2><br>     <p><br>        最近因为一个Web项目需要用到数据库，所以本着试一试的心态买了个阿里云的学生优惠服务器，然后开始了我艰难的数据库搭建，在网上找了很多资料也看了很多个教程，但是最后都没成功，最后终于在茫茫大海中找到了一篇优质博客…<br>        <br><br>        <br><br>        <a href="https://yq.aliyun.com/articles/47237" target="_blank" rel="noopener">    这里就是你想要的东西</a><br>    </p><br><p><br><br>    上面的博客实测是可以成功搭建好MySQL的，但是唯一的问题就是无法成功进行远程连接数据库，Java连接后台报错 Connection failuer。按照网上的各种方法什么更改wait_timeout和interactive_timeout之后都没用。然后也一一排除了用户权限的问题，3306端口开放的问题，服务器和客户端防火墙的问题，发现都是没问题的。<br><br><br><br>    最后历经千辛万苦终于找到了问题！！！<br><br>    问题出在了阿里云的服务器上，由于是学生优惠的服务器，所以有些权限是需要自行设置的,需要我自行设置<strong>服务器的安全组规则</strong><br><br><br></p><br><p><br>    我们需要在内网入方向规则里面添加下面这条规则<br>    <br><br>    <img src="/2019/03/01/阿里云服务器搭建MySQL及远程访问-1/img1.jpg" alt=""><br><br><br><br>    然后在内网出方向规则也加一条<br>    <br><br>    <img src="/2019/03/01/阿里云服务器搭建MySQL及远程访问-1/img2.jpg" alt=""><br></p><br><p>这样应该就没有问题了，可以成功连接数据库</p><br></body>
     </article>
     <!-- license  -->
     
@@ -404,17 +403,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2018/11/16/多项式相加链表和线性表实现/" title="多项式相加链表和线性表实现">
-                    <div class="nextTitle">多项式相加链表和线性表实现</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2018/11/15/that/" title="内存中堆、栈和静态存储区的用法">
-                    <div class="prevTitle">内存中堆、栈和静态存储区的用法</div>
+                <a href="/2019/02/11/Java连接数据库不需要加载驱动的问题/" title="Java连接数据库不需要加载驱动的问题">
+                    <div class="prevTitle">Java连接数据库不需要加载驱动的问题</div>
                 </a>
             
         </li>
@@ -533,7 +527,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">阿里云服务器上搭建MySQL</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
