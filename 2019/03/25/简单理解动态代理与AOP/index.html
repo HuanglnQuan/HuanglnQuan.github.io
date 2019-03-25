@@ -396,25 +396,21 @@ height:50vh;
             <main class="main post-page">
     <article class="article-entry">
         <h1 id="简单理解动态代理与AOP"><a href="#简单理解动态代理与AOP" class="headerlink" title="简单理解动态代理与AOP"></a>简单理解动态代理与AOP</h1><p></p><p>今天在学习反射机制的时候，接触到了动态代理与AOP，一开始也不明天具体是什么意思，有什么用处，然后在网上看了各路大神的blog终于有了一点自己的体会</p><p></p>
-<p></p><p></p>
-<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><p><br><br><strong>1.静态代理</strong> <br><br>&emsp;&emsp;所谓静态代理就是由程序员来编写或者特定工具自动的生成了源代码，在程序编译之前，所有的接口，被代理类，代理类等等都已经被确定下来了,程序运行之前，代理类的.class文件就已经生成了。<br><br><br><strong>2.动态代理</strong> <br><br>&emsp;&emsp;动态代理就是当程序运行时才会创建代理类，且确认代理类所需要代理的类。可以方便我们对代理类的函数进行一些加工和处理。并且动态代理可以解决一定程度上的代码冗余。你只需要创建一个代理类的对象便可以代理各种不同的类。<br></p><p></p>
+<p>
+
+</p><h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><p><br><br><strong>1.静态代理</strong> <br><br>&emsp;&emsp;所谓静态代理就是由程序员来编写或者特定工具自动的生成了源代码，在程序编译之前，所有的接口，被代理类，代理类等等都已经被确定下来了,程序运行之前，代理类的.class文件就已经生成了。<br><br><br><strong>2.动态代理</strong> <br><br>&emsp;&emsp;动态代理就是当程序运行时才会创建代理类，且确认代理类所需要代理的类。可以方便我们对代理类的函数进行一些加工和处理。并且动态代理可以解决一定程度上的代码冗余。你只需要创建一个代理类的对象便可以代理各种不同的类。<br></p><p></p>
 <p></p><p><br>&emsp;&emsp;实现动态代理我们主要用到<strong>InvocationHandler接口</strong>和<strong>Proxy类</strong><br></p>
 <p></p><p></p>
 <h2 id="1-首先我们需要创建一个代理类实现InvocationHandler接口"><a href="#1-首先我们需要创建一个代理类实现InvocationHandler接口" class="headerlink" title="1. 首先我们需要创建一个代理类实现InvocationHandler接口 ##"></a>1. 首先我们需要创建一个代理类实现InvocationHandler接口 ##<br></h2><pre><code>class myInvocationHandler implements InvocationHandler
 {
     Object obj;//这里表示你要代理的实际对象
-
     public myInvocationHandler(Object obj) {
-
         this.obj = obj;//在创建该类的对象时需要为获取需要代理的对象
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
         System.out.println(&quot;you are using USC_Agency,you ought to pay for $1000.&quot;);//这里是你要对方法进行何种加工处理，可以写日志等等
-
-
         method.invoke(obj, args);  //这里便是执行方法的正文
         return null;
     }
@@ -880,12 +876,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/java关键字static、final、this、super总结/">java关键字static、final、this、super总结</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/that/">内存中堆、栈和静态存储区的用法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/that/">内存中堆、栈和静态存储区的用法</a>
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href="/2018/11/15/java关键字static、final、this、super总结/">java关键字static、final、this、super总结</a>
         </li>
     
     </ul></div>
