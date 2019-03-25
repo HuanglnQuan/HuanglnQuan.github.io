@@ -266,7 +266,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">657</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.1k</span>阅读时长: <span class="post-count reading-time">4 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -441,15 +441,30 @@ public Object invoke(Object proxy, Method method, Object[] args) throws Throwabl
     }
 }
 </code></pre><p>4.最后我们需要用Proxy类来创建一个代理类对象，并且通过这个代理类对象来进行代理</p>
-<pre><code>/**
+<pre><code>Student stu1 = new Student(&quot;LittleGirl&quot;, 2000);
+myInvocationHandler myInv = new myInvocationHandler(stu1);//为Student类创建一个代理类
+/**
  * 通过Proxy创建一个代理类的实例，此处newProxyInstance需要三个参数
  * 1.第一个参数表示你要代理的这个对象的类的加载器
  * 2.第二个参数表示你要代理的这个类实现的所有接口，方便其进行方法调用
  * 3.第三个参数就是我们自己实现的一个实现了InvocationHandler接口的类的对象
  */
 Subject stuAgency = (Subject)Proxy.newProxyInstance(stu1.getClass().getClassLoader(), stu1.getClass().getInterfaces(), myInv);
-stuAgency.action();
-</code></pre>
+stuAgency.action();//这里调用aciton方法实际上是调用之前MyInvocationHandler中的invoke方法
+</code></pre><p>5.运行结果如下<br><br>    <img src="/2019/03/25/简单理解动态代理与AOP/1.png" alt=""></p>
+<h1 id="What-is-AOP"><a href="#What-is-AOP" class="headerlink" title="What is AOP?"></a>What is AOP?</h1><p>&emsp;&emsp;<strong>AOP</strong>(Aspect Oriented Programming)就是面向切面编程。其主要是利用“横切”的技术，剖解开封装的对象内部，并将那些影响了多个类的公共行为封装到一个可重用模块，就是所谓的“方面”。<br><br>&emsp;&emsp;简单来说，我个人一个比较粗陋但是比较容易理解的就是我们可以通过AOP技术来对方法进行改进，之前的OOP技术是纵向的，而我们利用横向切入的方法在不影响之前代码结构的前提下对方法进行改进扩展，例如当我们需要为方法写日志的时候，如果不使用AOP技术，那么我们需要在每一个方法前面都加上一行或者两行代码，一两个方法倒无伤大雅，如果有上千个呢？如果我们使用AOP技术，我们只需要在invoke方法中加上几行代码仅可。</p>
+<pre><code>System.out.println(&quot;方法开始执行。。。&quot;);
+method.invoke(obj, args);  //这里便是执行方法的正文
+System.out.println(&quot;方法执行结束。。。&quot;);
+</code></pre><p><br><br>&emsp;&emsp;或者我们需要对某个方法进行扩展，在执行该方法之前或者之后执行另外一个扩展方法时，我们可以这样做</p>
+<pre><code>if(method==targetMethod) //如果该方法为你想要改进的方法
+    {
+        beforeMethod();        
+        method.invoke(obj, args);  //这里便是执行方法的正文
+        afterMethod();
+    }
+</code></pre><p><strong>最后一句话总结，AOP就是把与主业务无关的事情放到代码外面去做。</strong></p>
+
     </article>
     <!-- license  -->
     
@@ -581,7 +596,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简单理解动态代理与AOP"><span class="toc-number">1.</span> <span class="toc-text">简单理解动态代理与AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#动态代理"><span class="toc-number">1.1.</span> <span class="toc-text">动态代理 ## </span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简单理解动态代理与AOP"><span class="toc-number">1.</span> <span class="toc-text">简单理解动态代理与AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#动态代理"><span class="toc-number">1.1.</span> <span class="toc-text">动态代理 ## </span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-AOP"><span class="toc-number">2.</span> <span class="toc-text">What is AOP?</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -594,6 +609,10 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
     
     
     
@@ -822,12 +841,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/24</span><a class="archive-post-title" href="/2018/11/24/简述网桥、交换机、路由器、网关在网络中的作用/">简述网桥、交换机、路由器、网关在网络中的作用</a>
+            <span class="archive-post-date">11/24</span><a class="archive-post-title" href="/2018/11/24/最小生成树Prim算法/">最小生成树Prim算法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/24</span><a class="archive-post-title" href="/2018/11/24/最小生成树Prim算法/">最小生成树Prim算法</a>
+            <span class="archive-post-date">11/24</span><a class="archive-post-title" href="/2018/11/24/简述网桥、交换机、路由器、网关在网络中的作用/">简述网桥、交换机、路由器、网关在网络中的作用</a>
         </li>
     
     
